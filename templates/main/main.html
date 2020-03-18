@@ -1,0 +1,30 @@
+{% extends 'main/wrapper.html' %}
+
+{% block body %}
+
+	<div class="ips">
+		<form method="POST" action="set-ip/">
+			{% csrf_token %}
+			<input type="text" name="ip" placeholder="IP">
+			<input type="text" name="name" placeholder="Name">
+			<input type="submit" value="Enter">
+		</form>
+		<form method="POST" action="delete-ip/">
+			{% csrf_token %}
+			<input type="text" name="name" placeholder="Name">
+			<input type="submit" value="Delete">
+		</form>
+		<div class="list">
+			{% if IPs != 0 %}
+				{% for ip in IPs %}
+					<ul>
+						<li>{{ip.ip}}   {{ip.name}}   {{ip.time}}</li>
+					</ul>
+				{% endfor %}
+			{% else %}
+				Every servers is not working
+			{% endif %}
+		</div>
+	</div>
+
+{% endblock %}
